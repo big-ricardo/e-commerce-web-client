@@ -4,4 +4,5 @@ export default interface Product {
     price: number;
     category?: string[];
     image: string;
+    qtd?: number;
 }

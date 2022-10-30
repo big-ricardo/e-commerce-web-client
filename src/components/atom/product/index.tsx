@@ -1,10 +1,11 @@
 import Product from "@/interfaces/product";
 import { addToCart, removeFromCart } from "../../../store/cart/actions";
-import { Tag, Badge, InputNumber, Tooltip, Popconfirm, Skeleton } from "antd";
+import { Badge, InputNumber, Tooltip, Popconfirm, Skeleton } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { memo, useEffect, useMemo, useState } from "react";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import Tag from "../tags";
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
@@ -107,13 +108,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </a>
           <div className="flex items-center mt-2.5 mb-5">
             {product.category?.map((tag, key) => (
-              <Tag
-                key={tag}
-                color={colors[key % colors.length]}
-                className="mr-2"
-              >
-                {tag}
-              </Tag>
+              <Tag key={key} index={key} tag={tag} />
             ))}
           </div>
           <div className="flex items-center justify-between">
