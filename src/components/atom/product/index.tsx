@@ -1,6 +1,6 @@
 import Product from "@/interfaces/product";
 import { addToCart, removeFromCart } from "../../../store/cart/actions";
-import { Tag, Badge, InputNumber, Tooltip, Popconfirm } from "antd";
+import { Tag, Badge, InputNumber, Tooltip, Popconfirm, Skeleton } from "antd";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { memo, useEffect, useMemo, useState } from "react";
@@ -151,3 +151,28 @@ const ProductCard: React.FC<ProductCardProps> = ({
 };
 
 export default memo(ProductCard);
+
+export const ProductCardSkeleton = () => {
+  return (
+    <div className="bg-white shadow-md rounded-lg max-w-xs hover:translate-x-2 w-96 max-w-xs">
+      <div className="w-full h-72">
+        <Skeleton.Image
+          className="object-cover rounded-t-lg p-8 w-full h-full"
+          style={{
+            width: "100%",
+            height: "100%",
+          }}
+        />
+      </div>
+      <div className="px-5 pb-5">
+        <div className="flex items-center mt-2.5 mb-5">
+          <Skeleton.Input className="mr-2" />
+        </div>
+        <div className="flex items-center justify-between">
+          <Skeleton.Button className="text-3xl font-bold text-gray-900" />
+          <Skeleton.Button className="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2 px-2.5 text-center" />
+        </div>
+      </div>
+    </div>
+  );
+};
