@@ -2,18 +2,16 @@ import Logo from "../../atom/logo";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import User from "@/interfaces/user";
-import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Badge, Popconfirm } from "antd";
-import Cart from "@/interfaces/cart";
 import { logout } from "../../../store/user/actions";
 import { memo } from "react";
 import { resetCart } from "../../../store/cart/actions";
+import NavbarCart from "../../../components/atom/cart/navbarCart";
+import { Popconfirm } from "antd";
 
 const NavBarComponent = () => {
   const dispatch = useDispatch();
 
   const user: User = useSelector((state: any) => state.user.data);
-  const cart: Cart = useSelector((state: any) => state.cart);
 
   const handleLogout = () => {
     dispatch(resetCart());
@@ -41,17 +39,7 @@ const NavBarComponent = () => {
           >
             <p className="hidden md:inline">Olá, {user.name}</p>
           </Popconfirm>
-          <div className="hover:bg-blue-200 rounded-full">
-            <Link to="/cart">
-              <Badge
-                count={cart.totalItems}
-                showZero
-                title="Carrinho de compras"
-              >
-                <ShoppingCartOutlined className="text-indigo-500 text-2xl" />
-              </Badge>
-            </Link>
-          </div>
+          <NavbarCart />
         </div>
       </div>
     </nav>
