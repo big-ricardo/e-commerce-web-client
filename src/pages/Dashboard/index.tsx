@@ -23,7 +23,7 @@ const DashboardComponent: React.FC = () => {
     <>
       <div className="bg-blue-100 rounded m-auto max-w-screen-xl mt-10 p-10">
         <h2 className="text-3xl font-bold text-indigo-500">Categorias</h2>
-        <CategoriesGrid categories={[]} />
+        <CategoriesGrid categories={categories} />
       </div>
       <div className="bg-blue-100 rounded m-auto max-w-screen-xl mt-10 p-10">
         <h2 className="text-3xl font-bold text-indigo-500">Produtos</h2>
