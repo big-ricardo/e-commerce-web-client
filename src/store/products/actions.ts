@@ -2,8 +2,8 @@ import Product from "@/interfaces/product";
 import * as actions from "./actionsTypes";
 
 export interface GetProducts {
-  categoryIds?: string[];
-  productId?: string;
+  categoryIds?: string |string[];
+  productId?: string | string[];
 }
 
 export const getProducts = ({ productId, categoryIds }: GetProducts) => ({

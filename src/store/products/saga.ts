@@ -5,7 +5,14 @@ import { api } from "../../services/api";
 import { getProductsSuccess, getProductsFailure, GetProducts } from "./actions";
 import { GET_PRODUCTS } from "./actionsTypes";
 
-export function* getProducts({ productId, categoryIds }: GetProducts) {
+interface payloadType {
+  type: string;
+  payload: GetProducts;
+}
+
+export function* getProducts({
+  payload: { productId, categoryIds },
+}: payloadType) {
   try {
     const response: AxiosResponse = yield call(api.get, "/products", {
       params: {
