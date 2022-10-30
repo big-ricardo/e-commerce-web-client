@@ -48,7 +48,7 @@ const AddressComponent: React.FC = () => {
         defaultValue={addresses.find(a => a.id === address?.id) || null}
       >
         {addresses?.map((address: Address, key) => (
-          <AddressItem key={key} address={address} />
+          <AddressItem key={key} index={key} address={address} />
         ))}
       </Radio.Group>
 

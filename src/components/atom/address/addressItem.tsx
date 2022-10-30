@@ -4,10 +4,10 @@ import React, { HTMLAttributes, memo, useCallback } from "react";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   address: Address;
-  key: number;
+  index: number;
 }
 
-const AddressItem: React.FC<Props> = ({ address, key }) => {
+const AddressItem: React.FC<Props> = ({ address, index }) => {
   const Item = useCallback(
     ({ label, value }: { label: string; value: string }) => {
       return (
@@ -28,7 +28,7 @@ const AddressItem: React.FC<Props> = ({ address, key }) => {
       <Radio value={address}>
         <div>
           <h2 className="text-base font-semibold text-indigo-700">
-            {`Endereço ${key + 1}`}
+            {`Endereço ${index + 1}`}
           </h2>
         </div>
         <div className="flex flex-col mt-3">
