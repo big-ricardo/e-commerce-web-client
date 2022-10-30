@@ -14,14 +14,7 @@ const CategoriesGrid: React.FC<Props> = ({ categories }) => {
       hideScrollbars={false}
     >
       <div className="flex flex-1 snap-x p-3 gap-3">
-        {[
-          ...categories,
-          ...categories,
-          ...categories,
-          ...categories,
-          ...categories,
-          ...categories,
-        ].map(category => (
+        {categories.map(category => (
           <CategoryItem key={category.id} category={category} />
         ))}
       </div>
