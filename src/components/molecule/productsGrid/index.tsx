@@ -13,29 +13,26 @@ const ProductsGrid: React.FC<ProductCardProps> = ({
   isConfirmRemoved,
   loading,
 }) => {
+  if (loading) {
+    return (
+      <div className="flex items-center justify-evenly xl:p-10 md-3 flex-wrap gap-5">
+        {Array.from({ length: 12 }).map((_, index) => (
+          <ProductCardSkeleton key={index} />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div
       className={`flex items-center justify-evenly xl:p-10 md-3 flex-wrap gap-5`}
     >
       {!products.length && (
-        <>
-          {loading ? (
-            <>
-              <ProductCardSkeleton />
-              <ProductCardSkeleton />
-              <ProductCardSkeleton />
-              <ProductCardSkeleton />
-              <ProductCardSkeleton />
-              <ProductCardSkeleton />
-            </>
-          ) : (
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-indigo-500">
-                Nenhum produto encontrado
-              </h2>
-            </div>
-          )}
-        </>
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-indigo-500">
+            Nenhum produto encontrado
+          </h2>
+        </div>
       )}
 
       {products.map(product => (

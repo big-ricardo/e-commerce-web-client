@@ -17,7 +17,7 @@ export function* getProducts({
     const response: AxiosResponse = yield call(api.get, "/products", {
       params: {
         id: productId,
-        categoryIds,
+        categories: categoryIds,
       },
     });
     const { data } = response;

@@ -83,7 +83,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
   }, [qtdProductInCart]);
 
   return (
-    <div className="bg-white shadow-md rounded-lg max-w-xs hover:translate-x-2">
+    <div
+      key={product.id}
+      className="bg-white shadow-md rounded-lg max-w-xs hover:translate-x-2"
+    >
       <Badge.Ribbon
         text="No carrinho"
         style={{ display: isProductInCart ? "" : "none" }}
