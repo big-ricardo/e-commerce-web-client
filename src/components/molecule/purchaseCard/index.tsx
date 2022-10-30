@@ -77,7 +77,7 @@ const PaymentCardComponent: React.FC = () => {
   }, [payment, address]);
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-10 h-fit mt-10">
+    <div className="bg-white rounded-lg shadow-lg p-2 md:p-10 h-fit mt-10">
       <Steps current={current}>
         {steps.map((item, key) => (
           <Steps.Step
