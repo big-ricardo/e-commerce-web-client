@@ -38,12 +38,12 @@ const CartComponent: React.FC = () => {
       </div>
       <div className="md:mt-10 flex items-start justify-center gap-5 flex-wrap">
         <ScrollTouch
-          className="max-h-full w-full 2xl:basis-2/3 m-auto"
+          className="w-full sm:w-1/2 m-auto"
           hideScrollbars={false}
           horizontal={false}
           style={{
             maxHeight: "calc(100vh - 300px)",
-            minHeight: "590px",
+            minHeight: "600px",
             overflowX: "hidden",
           }}
         >
