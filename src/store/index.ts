@@ -7,10 +7,11 @@ import rootSaga from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const localStorageMiddleware = ({ getState }:any) => {
-  return (next:any) => (action:any) => {
+const localStorageMiddleware = ({ getState }: any) => {
+  return (next: any) => (action: any) => {
     const result = next(action);
-    localStorage.setItem("applicationState", JSON.stringify(getState()));
+    const { cart, user } = getState();
+    localStorage.setItem("applicationState", JSON.stringify({ cart, user }));
     return result;
   };
 };
@@ -25,7 +26,9 @@ const store = configureStore({
   reducer,
   preloadedState: reHydrateStore(),
   middleware: getDefaultMiddleware => {
-    return getDefaultMiddleware().concat(sagaMiddleware).concat(localStorageMiddleware);
+    return getDefaultMiddleware()
+      .concat(sagaMiddleware)
+      .concat(localStorageMiddleware);
   },
 });
 sagaMiddleware.run(rootSaga);
