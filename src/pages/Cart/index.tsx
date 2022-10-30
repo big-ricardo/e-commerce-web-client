@@ -26,8 +26,8 @@ const CartComponent: React.FC = () => {
   }, [productsInCart]);
 
   return (
-    <div className="bg-blue-100 rounded-xl m-auto mt-10 p-10">
-      <div className="flex flex-wrap justify-between max-w-7xl">
+    <div className="bg-blue-100 rounded-xl m-auto mt-10 p-10 max-w-7xl">
+      <div className="flex flex-wrap justify-between ">
         <h2 className="text-3xl font-bold text-indigo-500">
           Produtos no Carrinho
         </h2>
