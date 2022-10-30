@@ -37,7 +37,7 @@ export default (state = initialState, action: any) => {
     case actions.GET_PRODUCTS_SUCCESS:
       return {
         ...state,
-        data: action.payload.categories,
+        data: action.payload.products,
         status: {
           ...state.status,
           get: {
