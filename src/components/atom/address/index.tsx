@@ -7,15 +7,7 @@ import type { RadioChangeEvent } from "antd";
 import { useDispatch } from "react-redux";
 import { addAddress } from "../../../store/cart/actions";
 import Cart from "@/interfaces/cart";
-
-const Item = ({ label, value }: { label: string; value: string }) => {
-  return (
-    <div className="flex gap-5 justify-start items-center">
-      <h5 className="text-base text-indigo-700">{label}:</h5>
-      <h6 className="text-lg break-words">{value}</h6>
-    </div>
-  );
-};
+import AddressItem from "./addressItem";
 
 const AddressComponent: React.FC = () => {
   const dispatch = useDispatch();
@@ -56,24 +48,7 @@ const AddressComponent: React.FC = () => {
         defaultValue={addresses.find(a => a.id === address?.id) || null}
       >
         {addresses?.map((address: Address, key) => (
-          <div
-            key={address.id}
-            className="flex items-center border-2 rounded-md border-indigo-100 p-5 mb-5"
-          >
-            <Radio value={address}>
-              <div>
-                <h2 className="text-base font-semibold text-indigo-700">
-                  {`Endereço ${key + 1}`}
-                </h2>
-              </div>
-              <div className="flex flex-col mt-3">
-                <Item label="Rua" value={address.street} />
-                <Item label="Bairro" value={address.neighborhood} />
-                <Item label="Cidade" value={address.city} />
-                <Item label="Complemento" value={address.complement} />
-              </div>
-            </Radio>
-          </div>
+          <AddressItem key={key} address={address} />
         ))}
       </Radio.Group>
 
