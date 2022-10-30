@@ -1,30 +1,43 @@
-import ProductCard from "../../atom/product";
+import ProductCard, { ProductCardSkeleton } from "../../atom/product";
 import Product from "@/interfaces/product";
 import { memo } from "react";
 
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   products: Product[];
   isConfirmRemoved?: boolean;
+  loading?: boolean;
 }
 
 const ProductsGrid: React.FC<ProductCardProps> = ({
   products,
   isConfirmRemoved,
+  loading,
 }) => {
-  if (products.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-96">
-        <h2 className="text-2xl font-bold text-indigo-500">
-          Nenhum produto no encontrado
-        </h2>
-      </div>
-    );
-  }
-
   return (
     <div
       className={`flex items-center justify-evenly xl:p-10 md-3 flex-wrap gap-5`}
     >
+      {!products.length && (
+        <>
+          {loading ? (
+            <>
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+              <ProductCardSkeleton />
+            </>
+          ) : (
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-indigo-500">
+                Nenhum produto encontrado
+              </h2>
+            </div>
+          )}
+        </>
+      )}
+
       {products.map(product => (
         <ProductCard
           product={product}

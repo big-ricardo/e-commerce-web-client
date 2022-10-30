@@ -5,9 +5,10 @@ import ScrollTouch from "react-indiana-drag-scroll";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   categories: Category[];
+  loading?: boolean;
 }
 
-const CategoriesGrid: React.FC<Props> = ({ categories }) => {
+const CategoriesGrid: React.FC<Props> = ({ categories, loading }) => {
   return (
     <ScrollTouch vertical={false} hideScrollbars={false}>
       <div className="flex flex-1 snap-x p-3 gap-3">
@@ -15,17 +16,27 @@ const CategoriesGrid: React.FC<Props> = ({ categories }) => {
           <CategoryItem key={category.id} category={category} />
         ))}
 
-        {categories.length === 0 && (
+        {!categories.length && (
           <>
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
-            <CategoryItemSkeleton />
+            {loading ? (
+              <>
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+                <CategoryItemSkeleton />
+              </>
+            ) : (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-indigo-500">
+                  Nenhuma categoria encontrada
+                </h2>
+              </div>
+            )}
           </>
         )}
       </div>
