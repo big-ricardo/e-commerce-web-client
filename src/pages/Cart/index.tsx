@@ -1,6 +1,7 @@
 import Product from "@/interfaces/product";
 import { memo, useMemo } from "react";
 import { useSelector } from "react-redux";
+import ScrollTouch from "react-indiana-drag-scroll";
 
 import ProductsGrid from "../../components/molecule/productsGrid";
 import PurchaseCard from "../../components/molecule/purchaseCard";
@@ -26,7 +27,7 @@ const CartComponent: React.FC = () => {
   }, [productsInCart]);
 
   return (
-    <div className="bg-blue-100 rounded-xl m-auto mt-10 p-10 max-w-7xl">
+    <div className="bg-blue-100 rounded-xl m-auto mt-10 p-10 w-11/12 2xl:w-3/4">
       <div className="flex flex-wrap justify-between ">
         <h2 className="text-3xl font-bold text-indigo-500">
           Produtos no Carrinho
@@ -35,10 +36,19 @@ const CartComponent: React.FC = () => {
           Total de items: {total}
         </h3>
       </div>
-      <div className="flex md:mt-10 justify-evenly flex-wrap">
-        <div className="max-w-full md:max-w-3xl">
+      <div className="md:mt-10 flex items-start justify-center gap-5 flex-wrap">
+        <ScrollTouch
+          className="max-h-full w-full 2xl:basis-2/3 m-auto"
+          hideScrollbars={false}
+          horizontal={false}
+          style={{
+            maxHeight: "calc(100vh - 300px)",
+            minHeight: "590px",
+            overflowX: "hidden",
+          }}
+        >
           <ProductsGrid products={productsUnique} isConfirmRemoved />
-        </div>
+        </ScrollTouch>
         {!!productsUnique.length && <PurchaseCard />}
       </div>
     </div>
