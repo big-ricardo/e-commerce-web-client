@@ -1,6 +1,9 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import Cart from "@/interfaces/cart";
 import { useDispatch, useSelector } from "react-redux";
+import { confirmPurchase, resetCart } from "../../../store/cart/actions";
+import { rootState } from "../../../store/reducers";
+import toastr from "toastr";
 
 const Item = ({ label, value }: { label: string; value: string | number }) => {
   return (
@@ -12,15 +15,77 @@ const Item = ({ label, value }: { label: string; value: string | number }) => {
 };
 
 const ConfirmPurchaseComponent: React.FC = () => {
-  const { payment, address, totalSales, totalItems }: Cart = useSelector(
-    (state: any) => state.cart,
-  );
+  const cart: Cart = useSelector((state: rootState) => state.cart);
+
+  const {
+    payment,
+    address,
+    totalSales,
+    totalItems,
+    status: { post: status },
+  } = cart;
 
   if (!payment || !address) return <div></div>;
 
   const dispatch = useDispatch();
 
-  const handleConfirmPurchase = () => {};
+  const handleConfirmPurchase = () => {
+    toastr.clear();
+    dispatch(confirmPurchase(cart));
+  };
+
+  const PaymentItem = useCallback(
+    () => (
+      <div className="flex flex-col">
+        <Item label="Nome" value={payment.name} />
+        <Item label="CPF" value={payment.cpf} />
+        <Item label="Número do cartão" value={payment.cardNumber} />
+        <Item label="Validade" value={payment.validity} />
+        <Item label="Código de segurança" value={payment.securityCode} />
+      </div>
+    ),
+    [payment],
+  );
+
+  const AddressItem = useCallback(
+    () => (
+      <div className="flex flex-col">
+        <Item label="Rua" value={address.street} />
+        <Item label="Bairro" value={address.neighborhood} />
+        <Item label="Cidade" value={address.city} />
+        <Item label="Complemento" value={address.complement} />
+      </div>
+    ),
+    [address],
+  );
+
+  const TotalSalesItem = useCallback(
+    () => (
+      <div className="flex flex-col">
+        <Item label="Total de itens" value={totalItems} />
+        <Item
+          label="Total da compra"
+          value={`R$ ${parseFloat(totalSales.toString()).toFixed(2)}`}
+        />
+      </div>
+    ),
+    [totalItems, totalSales],
+  );
+
+  useEffect(() => {
+    if (status.success) {
+      toastr.success("Compra realizada com sucesso!");
+      dispatch(resetCart());
+    }
+
+    if (status.error) {
+      toastr.error("Ocorreu um erro ao realizar a compra!");
+    }
+
+    if (status.loading) {
+      toastr.info("Realizando compra...");
+    }
+  }, [status]);
 
   return (
     <>
@@ -30,41 +95,25 @@ const ConfirmPurchaseComponent: React.FC = () => {
           <h3 className="text-xl font-bold text-indigo-500">
             Forma de Pagamento
           </h3>
-          <div className="flex flex-col">
-            <Item label="Nome" value={payment.name} />
-            <Item label="CPF" value={payment.cpf} />
-            <Item label="Número do cartão" value={payment.cardNumber} />
-            <Item label="Validade" value={payment.validity} />
-            <Item label="Código de segurança" value={payment.securityCode} />
-          </div>
+          <PaymentItem />
         </div>
         <div className="flex flex-col gap-2 divide-y">
           <h3 className="text-xl font-bold text-indigo-500">
             Endereço de Entrega
           </h3>
-          <div className="flex flex-col">
-            <Item label="Rua" value={address.street} />
-            <Item label="Bairro" value={address.neighborhood} />
-            <Item label="Cidade" value={address.city} />
-            <Item label="Complemento" value={address.complement} />
-          </div>
+          <AddressItem />
         </div>
         <div className="flex flex-col gap-2 divide-y">
           <h3 className="text-xl font-bold text-indigo-500">
             Resumo da Compra
           </h3>
-          <div className="flex flex-col">
-            <Item label="Total de itens" value={totalItems} />
-            <Item
-              label="Total da compra"
-              value={`R$ ${parseFloat(totalSales.toString()).toFixed(2)}`}
-            />
-          </div>
+          <TotalSalesItem />
         </div>
         <div className="flex justify-center mt-6">
           <button
             className="bg-indigo-500 text-lg text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-indigo-700 disabled:opacity-50"
             onClick={handleConfirmPurchase}
+            disabled={status.loading}
           >
             Confirmar Compra
           </button>

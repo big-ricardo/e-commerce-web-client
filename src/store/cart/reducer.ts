@@ -1,13 +1,27 @@
 import Cart from "@/interfaces/cart";
+import { requestStatus } from "@/interfaces/interfaces";
 import * as actions from "./actionTypes";
 
-const initialState: Cart = {
+interface CartState extends Cart {
+  status: {
+    post: requestStatus;
+  };
+}
+
+const initialState: CartState = {
   products: [],
   totalSales: 0,
   totalItems: 0,
   payment: null,
   address: null,
   confirmed: false,
+  status: {
+    post: {
+      loading: false,
+      error: null,
+      success: false,
+    },
+  },
 };
 
 export default (state = initialState, action: any) => {
@@ -62,6 +76,38 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         confirmed: true,
+        status: {
+          post: {
+            loading: true,
+            error: null,
+            success: false,
+          },
+        },
+      };
+    }
+    case actions.CONFIRM_PURCHASE_SUCCESS: {
+      return {
+        ...state,
+        status: {
+          post: {
+            loading: false,
+            error: null,
+            success: true,
+          },
+        },
+      };
+    }
+    case actions.CONFIRM_PURCHASE_FAILURE: {
+      const error = action.payload.error;
+      return {
+        ...state,
+        status: {
+          post: {
+            loading: false,
+            error,
+            success: false,
+          },
+        },
       };
     }
     default:
