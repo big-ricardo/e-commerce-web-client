@@ -52,7 +52,7 @@ const ConfirmPurchaseComponent: React.FC = () => {
       <div className="flex flex-col">
         <Item label="Rua" value={address.street} />
         <Item label="Bairro" value={address.neighborhood} />
-        <Item label="Cidade" value={address.city} />
+        <Item label="Cidade" value={address.city.name} />
         <Item label="Complemento" value={address.complement} />
       </div>
     ),
