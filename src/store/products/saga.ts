@@ -14,12 +14,11 @@ export function* getProducts({
   payload: { productId, categoryIds },
 }: payloadType) {
   try {
-    const response: AxiosResponse = yield call(api.get, "/products", {
-      params: {
-        id: productId,
-        categories: categoryIds,
-      },
-    });
+    let params = '';
+    if(categoryIds) {
+      params = `/categoria/${categoryIds}`;
+    }
+    const response: AxiosResponse = yield call(api.get, `/produtos${params}`);
     const { data } = response;
     yield put(getProductsSuccess(data));
   } catch (error: any) {

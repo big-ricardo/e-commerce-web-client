@@ -22,14 +22,14 @@ const DashboardComponent: React.FC = () => {
     if (!statusCategory.get.loading) {
       dispatch(getCategories());
     }
-  }, []);
+  }, [statusCategory.get]);
 
-  // useEffect(() => {
-  //   if (statusProduct.get.success) return;
-  //   if (!statusProduct.get.loading) {
-  //     dispatch(getProducts({}));
-  //   }
-  // }, [statusProduct.get]);
+  useEffect(() => {
+    if (statusProduct.get.success) return;
+    if (!statusProduct.get.loading) {
+      dispatch(getProducts({}));
+    }
+  }, [statusProduct.get]);
 
   return (
     <>
