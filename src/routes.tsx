@@ -29,7 +29,7 @@ interface ProtectedRouteProps {
 function App() {
   const user: User = useSelector((state: any) => state.user.data);
 
-  if (user.token) {
+  if (user?.token) {
     api.defaults.headers.Authorization = user.token;
   }
 
@@ -52,7 +52,7 @@ function App() {
   return (
     <ThemeProvider>
       <GlobalStyle />
-      <Router>
+      <Router basename="e-commerce">
         <Routes>
           <Route
             path="/"

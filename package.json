@@ -2,7 +2,9 @@
   "name": "react-ts-avatar",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://luiss1569.github.io/e-commerce/",
   "scripts": {
+    "deploy": "yarn build && yarn gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -44,6 +46,7 @@
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.6",
+    "gh-pages": "^4.0.0",
     "jest-styled-components": "^7.1.1",
     "jsdom": "^20.0.1",
     "postcss": "^8.4.18",
