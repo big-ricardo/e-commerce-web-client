@@ -1,14 +1,14 @@
 import Address, { AddressCreate } from "./address";
 
 export default interface User {
-    authorization: string;
+    token: string;
     name: string;
     email: string;
     addresses: Address[];
 }
 
 export interface UserLogin {
-    name: string;
+    email: string;
     password: string;
 }
 

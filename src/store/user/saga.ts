@@ -13,11 +13,16 @@ import { AxiosResponse } from "axios";
 export function* loginUser(action: { payload: { user: UserLogin } }) {
   try {
     const response: AxiosResponse = yield call(
-      api.get,
-      "/login"
+      api.post,
+      "/login",
+      {
+        email: action.payload.user.email,
+        senha: action.payload.user.password,
+      }
     );
     const { data } = response;
-    yield put(loginSuccess({ ...data }));
+    const { token } = data;
+    yield put(loginSuccess({ ...data.cliente, token }));
   } catch (error: any) {
     yield put(loginFailure(error.message));
   }

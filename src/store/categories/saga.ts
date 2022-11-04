@@ -7,7 +7,7 @@ import { GET_CATEGORIES } from "./actionsTypes";
 
 export function* getCategories() {
   try {
-    const response: AxiosResponse = yield call(api.get, "/categories");
+    const response: AxiosResponse = yield call(api.get, "/categorias");
     const { data } = response;
     yield put(getCategoriesSuccess(data));
   } catch (error: any) {
