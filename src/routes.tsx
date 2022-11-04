@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import User from "./interfaces/user";
 import Dashboard from "./pages/Dashboard";
 import CartComponent from "./pages/Cart";
+import { api } from "./services/api";
 
 import NavBar from "./components/molecule/navbar";
 
@@ -27,6 +28,10 @@ interface ProtectedRouteProps {
 
 function App() {
   const user: User = useSelector((state: any) => state.user.data);
+
+  if (user.token) {
+    api.defaults.headers.Authorization = user.token;
+  }
 
   const ProtectedRoute: React.FC<ProtectedRouteProps> = useCallback(
     ({ children }) => {
@@ -57,7 +62,14 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/cart" element={<ProtectedRoute><CartComponent /></ProtectedRoute>} />
+          <Route
+            path="/cart"
+            element={
+              <ProtectedRoute>
+                <CartComponent />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<LoginComponent />} />
           <Route path="/register" element={<RegisterComponent />} />
           <Route path="*" element={<Navigate to="/" replace />} />
