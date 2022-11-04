@@ -4,7 +4,14 @@ import categoriesSaga from "./categories/saga";
 import userSaga from "./user/saga";
 import productsSaga from "./products/saga";
 import cartSaga from "./cart/saga";
+import cardSaga from "./card/saga";
 
 export default function* rootSaga() {
-  yield all([userSaga(), categoriesSaga(), productsSaga(), cartSaga()]);
+  yield all([
+    userSaga(),
+    categoriesSaga(),
+    productsSaga(),
+    cartSaga(),
+    cardSaga(),
+  ]);
 }

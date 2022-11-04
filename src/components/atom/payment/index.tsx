@@ -1,17 +1,25 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import { rootState } from "@/store/reducers";
 import CartAdd from "./sub/cartAdd";
 import Pix from "./sub/pix";
+import { getCards } from "../../../store/card/actions";
 
 const PaymentComponent = () => {
   const [type, setType] = useState("creditCard");
   const dispatch = useDispatch();
 
-  const cart = useSelector((state: rootState) => state.user.data.cartao);
-  const totalSales = useSelector((state: any) => state.cart.totalSales);
+  const card = useSelector((state: rootState) => state.card);
+  const user = useSelector((state: rootState) => state.user.data);
+
+  useEffect(() => {
+    if (card.card) return;
+    if (card.status.getCards.loading) return;
+
+    dispatch(getCards(user.id));
+  }, []);
 
   return (
     <>

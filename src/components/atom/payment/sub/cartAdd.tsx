@@ -5,19 +5,31 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import Payment from "@/interfaces/payment";
+import Card from "@/interfaces/card";
+import { rootState } from "@/store/reducers";
 
 const PaymentComponent = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
 
-  const totalSales = useSelector((state: any) => state.cart.totalSales);
-  const payment: Payment = useSelector((state: any) => state.cart.payment);
-  const card = useSelector((state: any) => state.user.data.cartao);
+  const totalSales = useSelector((state: rootState) => state.cart.totalSales);
+  const payment: Payment = useSelector(
+    (state: rootState) => state.cart.payment,
+  );
+  const card: Card = useSelector((state: rootState) => state.card.card);
 
-  const onFinish = (values: Payment) => {
+  const onFinish = (values: Card) => {
+    const data = {
+      ...values,
+      client: {
+        name: values.name || card.client.name,
+        cpf: values.cpf || card.client.cpf,
+        email: '',
+      },
+    };
     dispatch(
       addPayment({
-        ...values,
+        card: data,
         type: "creditCard",
       }),
     );
@@ -50,6 +62,12 @@ const PaymentComponent = () => {
                 <h3 className="text-lg text-indigo-500">Validade:</h3>
                 <h3 className="text-xl font-bold text-indigo-500">
                   {card.validity}
+                </h3>
+              </div>
+              <div className="flex gap-5">
+                <h3 className="text-lg text-indigo-500">nome:</h3>
+                <h3 className="text-xl font-bold text-indigo-500">
+                  {card.client.name}
                 </h3>
               </div>
             </div>
