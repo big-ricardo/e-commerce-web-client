@@ -5,11 +5,17 @@ import { confirmPurchase, resetCart } from "../../../store/cart/actions";
 import { rootState } from "../../../store/reducers";
 import toastr from "toastr";
 
-const Item = ({ label, value }: { label: string; value: string | number }) => {
+const Item = ({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | number | undefined;
+}) => {
   return (
     <div className="flex gap-5 justify-start items-center">
       <h5 className="text-base text-indigo-700">{label}:</h5>
-      <h6 className="text-base font-bold break-words">{value}</h6>
+      <h6 className="text-base font-bold break-words">{value ?? "-"}</h6>
     </div>
   );
 };
