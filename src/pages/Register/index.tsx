@@ -11,6 +11,7 @@ import { create, resetStatus } from "../../store/user/actions";
 import { useSelector } from "react-redux";
 import { requestStatus } from "@/interfaces/interfaces";
 import toastr from "toastr";
+import { api } from "../../services/api";
 
 const RegisterComponent: React.FC = () => {
   const dispatch = useDispatch();

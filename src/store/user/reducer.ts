@@ -7,6 +7,7 @@ export interface UserState {
   status: {
     login: requestStatus;
     create: requestStatus;
+    get_address: requestStatus;
   };
 }
 
@@ -21,6 +22,7 @@ const initialState: UserState = {
   status: {
     login: { ...initialStateStatus },
     create: { ...initialStateStatus },
+    get_address: { ...initialStateStatus },
   },
 };
 
@@ -110,6 +112,45 @@ export default (state = initialState, action: any) => {
         status: {
           create: { ...initialStateStatus },
           login: { ...initialStateStatus },
+          get_address: { ...initialStateStatus },
+        },
+      };
+    case actions.USER_GET_ADDRESS:
+      return {
+        ...state,
+        state: {
+          ...state.status,
+          get_address: {
+            loading: true,
+          },
+        },
+      };
+    case actions.USER_GET_ADDRESS_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          address: action.payload.address,
+        },
+        status: {
+          ...state.status,
+          get_address: {
+            error: null,
+            loading: false,
+            success: true,
+          },
+        },
+      };
+    case actions.USER_GET_ADDRESS_FAILURE:
+      return {
+        ...state,
+        status: {
+          ...state.status,
+          get_address: {
+            error: action.payload.error,
+            loading: false,
+            success: false,
+          },
         },
       };
     default:

@@ -7,11 +7,6 @@ import * as path from "path";
 export default defineConfig({
   plugins: [react()],
   base: "/e-commerce/",
-  resolve: {
-    alias: {
-      '@/': path.resolve(__dirname, './src'),
-    },
-  },
   test: {
     globals: true,
     environment: "jsdom",

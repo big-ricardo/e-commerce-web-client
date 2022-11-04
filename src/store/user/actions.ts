@@ -1,3 +1,4 @@
+import Address from "@/interfaces/address";
 import User, { UserCreate, UserLogin } from "@/interfaces/user";
 import * as actions from "./actionTypes";
 
@@ -27,7 +28,7 @@ export const logout = () => {
   return {
     type: actions.USER_LOGOUT,
   };
-}
+};
 
 export const create = (user: UserCreate) => ({
   type: actions.USER_CREATE,
@@ -52,4 +53,25 @@ export const createFailure = (error: any) => ({
 
 export const resetStatus = () => ({
   type: actions.USER_RESET_STATUS,
+});
+
+export const getAddress = (id:string) => ({
+  type: actions.USER_GET_ADDRESS,
+  payload: {
+    id,
+  },
+});
+
+export const getAddressSuccess = (address: Address) => ({
+  type: actions.USER_GET_ADDRESS_SUCCESS,
+  payload: {
+    address,
+  },
+});
+
+export const getAddressFailure = (error: Address) => ({
+  type: actions.USER_GET_ADDRESS_FAILURE,
+  payload: {
+    error,
+  },
 });

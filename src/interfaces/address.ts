@@ -3,7 +3,10 @@ export default interface Address {
     street: string;
     complement: string;
     neighborhood: string;
-    city: string;
+    city: {
+        id: string;
+        name: string;
+    };
 }
 
 export interface AddressCreate {
