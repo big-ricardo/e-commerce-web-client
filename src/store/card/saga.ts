@@ -15,10 +15,12 @@ export function* addCard({ payload }: any) {
   const card: Card = payload.card;
   try {
     const response: AxiosResponse = yield call(api.post, "/cartoes", {
-      card,
+      ...card,
       clienteId: payload.id,
     });
-    const { data } = response;
+    let { data } = response;
+    data = { ...data, client: data.cliente };
+    delete data.cliente;
     yield put(addCardSuccess(data));
   } catch (error: any) {
     yield put(addCardFailure(error.message));
@@ -32,7 +34,6 @@ export function* getCard({ payload }: any) {
     let { data } = response;
     data = { ...data, client: data.cliente };
     delete data.cliente;
-
     yield put(getCardsSuccess(data));
   } catch (error: any) {
     yield put(getCardsFailure(error.message));

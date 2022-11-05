@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import Payment from "@/interfaces/payment";
 import Card from "@/interfaces/card";
 import { rootState } from "@/store/reducers";
+import { addCard } from "../../../../store/card/actions";
+import toastr from "toastr";
 
 const PaymentComponent = () => {
   const dispatch = useDispatch();
@@ -16,17 +18,13 @@ const PaymentComponent = () => {
   const payment: Payment = useSelector(
     (state: rootState) => state.cart.payment,
   );
-  const card: Card = useSelector((state: rootState) => state.card.card);
+  const {
+    card,
+    status: { addCard: status },
+  } = useSelector((state: rootState) => state.card);
+  const user = useSelector((state: rootState) => state.user.data);
 
-  const onFinish = (values: Card) => {
-    const data = {
-      ...values,
-      client: {
-        name: values.name || card.client.name,
-        cpf: values.cpf || card.client.cpf,
-        email: '',
-      },
-    };
+  const addFormPayment = (data: any) => {
     dispatch(
       addPayment({
         card: data,
@@ -35,9 +33,13 @@ const PaymentComponent = () => {
     );
   };
 
+  const onFinish = (values: Card) => {
+    dispatch(addCard(user.id, values));
+  };
+
   const handleClick = (e: any) => {
     e.preventDefault();
-    onFinish({ ...card });
+    addFormPayment(card);
   };
 
   useEffect(() => {
@@ -46,28 +48,42 @@ const PaymentComponent = () => {
     }
   }, [payment]);
 
+  useEffect(() => {
+    if (status.loading) {
+      toastr.info("Salvando cartão...");
+    }
+    if (status.success) {
+      toastr.success("Cartão salvo com sucesso!");
+      addFormPayment(card);
+      status.success = false;
+    }
+    if (status.error) {
+      toastr.error("Erro ao adicionar cartão");
+    }
+  }, [status, card]);
+
   return (
     <>
-      {card ? (
+      {!card ? (
         <div className="p-2 flex flex-col gap-5">
           <div className="flex flex-row gap-5 border p-5">
             <div className="flex flex-col gap-5">
               <div className="flex gap-5">
                 <h3 className="text-lg text-indigo-500">Número do Cartão:</h3>
                 <h3 className="text-xl font-bold text-indigo-500">
-                  {card.cardNumber}
+                  {card?.cardNumber}
                 </h3>
               </div>
               <div className="flex gap-5">
                 <h3 className="text-lg text-indigo-500">Validade:</h3>
                 <h3 className="text-xl font-bold text-indigo-500">
-                  {card.validity}
+                  {card?.validity}
                 </h3>
               </div>
               <div className="flex gap-5">
                 <h3 className="text-lg text-indigo-500">nome:</h3>
                 <h3 className="text-xl font-bold text-indigo-500">
-                  {card.client.name}
+                  {card?.client.name}
                 </h3>
               </div>
             </div>
@@ -166,7 +182,10 @@ const PaymentComponent = () => {
               <h3 className="text-2xl text-indigo-700 bg-white px-5 py-2 rounded-full">
                 {`Total: R$ ${parseFloat(totalSales).toFixed(2)}`}
               </h3>
-              <button className="bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50">
+              <button
+                className="bg-indigo-500 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50"
+                disabled={status.loading}
+              >
                 Add pagamento
               </button>
             </div>

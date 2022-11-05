@@ -48,7 +48,7 @@ const ConfirmPurchaseComponent: React.FC = () => {
   const PaymentItem = useCallback(
     () => (
       <div className="flex flex-col">
-        <Item label="Nome" value={payment.card?.client.name} />
+        <Item label="Nome" value={payment.card?.client?.name} />
         <Item label="CPF" value={payment.card?.client?.cpf} />
         <Item label="Número do cartão" value={payment.card?.cardNumber} />
         <Item label="Validade" value={payment.card?.validity} />

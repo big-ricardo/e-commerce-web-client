@@ -10,13 +10,15 @@ export interface AddressCreate {
   street: string;
   complement: string;
   neighborhood: string;
+  zipCode: string;
+  number: string;
   city: City;
+  state: State;
 }
 
 export interface City {
   id: string;
   name: string;
-  state: State;
 }
 
 export interface State {
