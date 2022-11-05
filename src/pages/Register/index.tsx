@@ -2,7 +2,7 @@ import Submit from "../../components/atom/submit";
 import AddressInput from "../../components/molecule/addressInputs";
 import { UserCreate } from "@/interfaces/user";
 import { MailOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Form, Input, Tooltip } from "antd";
+import { Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import { memo, useEffect } from "react";
 import Logo from "../../components/atom/logo";
@@ -11,7 +11,6 @@ import { create, resetStatus } from "../../store/user/actions";
 import { useSelector } from "react-redux";
 import { requestStatus } from "@/interfaces/interfaces";
 import toastr from "toastr";
-import { api } from "../../services/api";
 
 const RegisterComponent: React.FC = () => {
   const dispatch = useDispatch();
