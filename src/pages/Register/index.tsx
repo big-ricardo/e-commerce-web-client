@@ -1,5 +1,5 @@
 import Submit from "../../components/atom/submit";
-import AddressInput from "../../components/molecule/adressInputs";
+import AddressInput from "../../components/molecule/addressInputs";
 import { UserCreate } from "@/interfaces/user";
 import { MailOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Form, Input, Tooltip } from "antd";
@@ -19,7 +19,19 @@ const RegisterComponent: React.FC = () => {
     (state: any) => state.user.status.create,
   );
 
-  const onFinish = (values: UserCreate) => {
+  const onFinish = (values: any) => {
+    console.log("Received values of form: ", values);
+    values.addresses = values.addresses.map((address: any) => {
+      return {
+        ...address,
+        city: {
+          id: address.city,
+          state: {
+            id: address.state,
+          },
+        },
+      };
+    });
     dispatch(create(values));
   };
 

@@ -5,6 +5,7 @@ import CategoriesGrid from "../../components/molecule/categoriesGrid";
 import { getCategories } from "../../store/categories/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../store/products/actions";
+import toastr from "toastr";
 
 const DashboardComponent: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,14 +20,26 @@ const DashboardComponent: React.FC = () => {
 
   useEffect(() => {
     if (statusCategory.get.success) return;
-    if (!statusCategory.get.loading) {
+    if (statusCategory.get.loading) return;
+    if (statusCategory.get.error) {
+      toastr.error("Error em obter categorias");
+      setTimeout(() => {
+        dispatch(getCategories());
+      }, 5000);
+    } else {
       dispatch(getCategories());
     }
   }, [statusCategory.get]);
 
   useEffect(() => {
     if (statusProduct.get.success) return;
-    if (!statusProduct.get.loading) {
+    if (statusProduct.get.loading) return;
+    if (statusProduct.get.error) {
+      toastr.error("Error em carregar os produtos");
+      setTimeout(() => {
+        dispatch(getProducts({}));
+      }, 5000);
+    } else {
       dispatch(getProducts({}));
     }
   }, [statusProduct.get]);

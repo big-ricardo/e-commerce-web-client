@@ -26,7 +26,17 @@ export function* loginUser(action: { payload: { user: UserLogin } }) {
   }
 }
 
-export function* createUser(action: { payload: { user: UserCreate } }) {
+export function* createUser(action: { payload: { user: any } }) {
+  action.payload.user.addresses.forEach((address: any) => {
+    address["city"] = {
+      ...address.city,
+      state: {
+        ...address.state,
+      },
+    };
+    delete address.state;
+  });
+  return;
   try {
     const response: AxiosResponse = yield call(
       api.post,
