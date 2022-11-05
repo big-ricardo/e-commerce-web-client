@@ -83,7 +83,7 @@ const PaymentComponent = () => {
               <div className="flex gap-5">
                 <h3 className="text-lg text-indigo-500">nome:</h3>
                 <h3 className="text-xl font-bold text-indigo-500">
-                  {card?.client.name}
+                  {card?.client?.name}
                 </h3>
               </div>
             </div>
