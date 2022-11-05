@@ -64,7 +64,7 @@ const PaymentComponent = () => {
 
   return (
     <>
-      {!card ? (
+      {card ? (
         <div className="p-2 flex flex-col gap-5">
           <div className="flex flex-row gap-5 border p-5">
             <div className="flex flex-col gap-5">
