@@ -29,8 +29,11 @@ export function* getCard({ payload }: any) {
   const id: string = payload.id;
   try {
     const response: AxiosResponse = yield call(api.get, `/cartoes/${id}`);
-    const { data } = response;
-    yield put(getCardsSuccess({ ...data, client: data.cliente }));
+    let { data } = response;
+    data = { ...data, client: data.cliente };
+    delete data.cliente;
+
+    yield put(getCardsSuccess(data));
   } catch (error: any) {
     yield put(getCardsFailure(error.message));
   }
