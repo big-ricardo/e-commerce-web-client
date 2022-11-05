@@ -21,6 +21,7 @@ import CartComponent from "./pages/Cart";
 import { api } from "./services/api";
 
 import NavBar from "./components/molecule/navbar";
+import MyPurchase from "./pages/My-Purchase";
 
 interface ProtectedRouteProps {
   children?: ReactNode;
@@ -67,6 +68,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <CartComponent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/my-purchases"
+            element={
+              <ProtectedRoute>
+                <MyPurchase />
               </ProtectedRoute>
             }
           />

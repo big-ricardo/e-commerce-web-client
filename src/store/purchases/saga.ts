@@ -4,15 +4,25 @@ import { AxiosResponse } from "axios";
 import { api } from "../../services/api";
 import { getPurchasesFailure, getPurchasesSuccess } from "./actions";
 import { GET_PURCHASES } from "./actionTypes";
+import Purchase from "@/interfaces/purchases";
 
 export function* getPurchases({ payload }: any) {
   const id: string = payload.id;
   try {
     const response: AxiosResponse = yield call(
       api.get,
-      "/pedidos/cliente/" + id,
+      "/clientes/pedidos/" + id,
     );
-    const { data } = response;
+    const data: Purchase[] = response.data.map((purchase: any) => {
+      return {
+        id: purchase.id,
+        date: purchase.dataPedido,
+        products: purchase.produtos,
+        address: purchase.endereco,
+        total: purchase.valorTotal,
+      };
+    });
+
     yield put(getPurchasesSuccess(data));
   } catch (error: any) {
     yield put(getPurchasesFailure(error.message));

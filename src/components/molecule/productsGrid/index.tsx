@@ -6,12 +6,14 @@ interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   products: Product[];
   isConfirmRemoved?: boolean;
   loading?: boolean;
+  isPurchase?: boolean;
 }
 
 const ProductsGrid: React.FC<ProductCardProps> = ({
   products,
   isConfirmRemoved,
   loading,
+  isPurchase,
 }) => {
   if (loading) {
     return (
@@ -40,6 +42,7 @@ const ProductsGrid: React.FC<ProductCardProps> = ({
           product={product}
           key={product.id}
           isConfirmRemoved={isConfirmRemoved}
+          isPurchase={isPurchase}
         />
       ))}
     </div>

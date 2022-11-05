@@ -10,6 +10,7 @@ import Tag from "../tags";
 interface ProductCardProps extends React.HTMLAttributes<HTMLDivElement> {
   product: Product;
   isConfirmRemoved?: boolean;
+  isPurchase?: boolean;
 }
 
 const colors = [
@@ -29,6 +30,7 @@ const colors = [
 const ProductCard: React.FC<ProductCardProps> = ({
   product,
   isConfirmRemoved = false,
+  isPurchase = false,
 }) => {
   const dispatch = useDispatch();
 
@@ -113,33 +115,37 @@ const ProductCard: React.FC<ProductCardProps> = ({
           </div>
           <div className="flex items-center justify-between">
             <span className="text-3xl font-bold text-gray-900">{`R$${product.price}`}</span>
-            {isProductInCart ? (
-              <div>
-                <Popconfirm
-                  title="Deseja remover o produto do carrinho?"
-                  onConfirm={removeItem}
-                  open={openConfirm}
-                  onCancel={onCancel}
-                  okType="danger"
-                >
-                  <InputNumber
-                    min={0}
-                    defaultValue={qtdProductInCart}
-                    onChange={handleUpdateQtd}
-                    inputMode="numeric"
-                    value={qtd}
-                  />
-                </Popconfirm>
-              </div>
-            ) : (
-              <Tooltip title="Adicionar ao carrinho">
-                <button
-                  onClick={addItem}
-                  className="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2 px-2.5 text-center"
-                >
-                  <ShoppingCartOutlined className="text-white text-2xl" />
-                </button>
-              </Tooltip>
+            {!isPurchase && (
+              <>
+                {isProductInCart ? (
+                  <div>
+                    <Popconfirm
+                      title="Deseja remover o produto do carrinho?"
+                      onConfirm={removeItem}
+                      open={openConfirm}
+                      onCancel={onCancel}
+                      okType="danger"
+                    >
+                      <InputNumber
+                        min={0}
+                        defaultValue={qtdProductInCart}
+                        onChange={handleUpdateQtd}
+                        inputMode="numeric"
+                        value={qtd}
+                      />
+                    </Popconfirm>
+                  </div>
+                ) : (
+                  <Tooltip title="Adicionar ao carrinho">
+                    <button
+                      onClick={addItem}
+                      className="text-white bg-indigo-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm py-2 px-2.5 text-center"
+                    >
+                      <ShoppingCartOutlined className="text-white text-2xl" />
+                    </button>
+                  </Tooltip>
+                )}
+              </>
             )}
           </div>
         </div>

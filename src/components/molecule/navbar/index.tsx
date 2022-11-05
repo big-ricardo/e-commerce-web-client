@@ -27,7 +27,13 @@ const NavBarComponent = () => {
             E-commerce
           </span>
         </Link>
-        <div className="flex md:order-2 justify-center items-center gap-3 p-3">
+        <div className="flex md:order-2 justify-center items-center gap-9 p-3">
+          <Link
+            to="/my-purchases"
+            className="text-gray-600 hover:text-gray-900 text-md md:text-lg font-semibold whitespace-nowrap"
+          >
+            Minhas compras
+          </Link>
           <Popconfirm
             title="Deseja realmente sair?"
             onConfirm={handleLogout}
