@@ -1,9 +1,41 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
 
-import { Form, Input, Tooltip } from "antd";
+import { Form, Input, Select, Tooltip } from "antd";
+import { api } from "../../../services/api";
+import { City, State } from "@/interfaces/address";
 
 const AddressInputComponent = () => {
+  const [citys, setCitys] = useState<City[]>([]);
+  const [states, setStates] = useState<State[]>([]);
+  const [selectedState, setSelectedState] = useState<State>();
+
+  const getStates = async () => {
+    await api.get("/estados").then(res => setStates(res.data));
+  };
+
+  const getCities = async () => {
+    const state = selectedState?.id;
+
+    if (state) {
+      await api.get(`/cidades/estado/${state}`).then(res => setCitys(res.data));
+    }
+  };
+
+  const handleSelectState = (value: string) => {
+    const state = states.find(state => state.id === value);
+
+    setSelectedState(state);
+  };
+
+  useEffect(() => {
+    if (!states.length) getStates();
+  }, []);
+
+  useEffect(() => {
+    getCities();
+  }, [selectedState]);
+
   return (
     <Form.List
       name="addresses"
@@ -94,18 +126,48 @@ const AddressInputComponent = () => {
                 >
                   <Input placeholder="Complemento" size="large" />
                 </Form.Item>
+
                 <Form.Item
                   {...field}
-                  name={[name, "city"]}
+                  name={[name, "state"]}
                   rules={[
                     {
                       required: true,
-                      whitespace: true,
+                      message: "Preencha seu estado.",
+                    },
+                  ]}
+                >
+                  <Select
+                    placeholder="Estado"
+                    size="large"
+                    onChange={handleSelectState}
+                  >
+                    {states.map(state => (
+                      <Select.Option key={state.id} value={state.id}>
+                        {state.name}
+                      </Select.Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+
+                <Form.Item
+                  {...field}
+                  name={[name, "city"]}
+                  dependencies={[name, "state"]}
+                  rules={[
+                    {
+                      required: true,
                       message: "Preencha sua cidade.",
                     },
                   ]}
                 >
-                  <Input placeholder="Cidade" size="large" />
+                  <Select placeholder="Cidade" size="large">
+                    {citys.map(city => (
+                      <Select.Option key={city.id} value={city.id}>
+                        {city.name}
+                      </Select.Option>
+                    ))}
+                  </Select>
                 </Form.Item>
               </Form.Item>
             </div>
