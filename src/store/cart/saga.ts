@@ -16,7 +16,7 @@ interface ConfirmPurchaseAction {
 export function* getCategories({ payload }: ConfirmPurchaseAction) {
   try {
     const response: AxiosResponse = yield call(api.post, "/cart", {
-      cart: payload.cart,
+      ...payload.cart,
     });
     const { data } = response;
     yield put(confirmPurchaseSuccess());

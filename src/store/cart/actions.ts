@@ -1,7 +1,7 @@
 import Address from "@/interfaces/address";
-import Cart from "@/interfaces/cart";
 import Payment from "@/interfaces/payment";
 import Product from "@/interfaces/product";
+import { CreatePurchase } from "@/interfaces/purchases";
 import * as actions from "./actionTypes";
 
 export const addToCart = (product: Product) => ({
@@ -36,7 +36,7 @@ export const addAddress = (address: Address) => ({
   },
 });
 
-export const confirmPurchase = (cart: Cart) => ({
+export const confirmPurchase = (cart: CreatePurchase) => ({
   type: actions.CONFIRM_PURCHASE,
   payload: {
     cart,

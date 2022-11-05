@@ -37,7 +37,12 @@ const ConfirmPurchaseComponent: React.FC = () => {
 
   const handleConfirmPurchase = () => {
     toastr.clear();
-    dispatch(confirmPurchase(cart));
+    const data = {
+      payment: payment.type === "creditCard" ? 1 : 2,
+      address,
+      products: cart.products,
+    };
+    dispatch(confirmPurchase(data));
   };
 
   const PaymentItem = useCallback(
