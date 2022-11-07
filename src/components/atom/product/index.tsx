@@ -92,7 +92,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     >
       <Badge.Ribbon
         text="No carrinho"
-        style={{ display: isProductInCart ? "" : "none" }}
+        style={{ display: isProductInCart && !isPurchase ? "" : "none" }}
         color="green"
       >
         <div>

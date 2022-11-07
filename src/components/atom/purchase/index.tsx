@@ -1,6 +1,7 @@
 import ProductsGrid from "../../../components/molecule/productsGrid";
 import Purchase from "@/interfaces/purchases";
 import React, { memo } from "react";
+import { Divider } from "antd";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   purchase: Purchase;
@@ -36,6 +37,7 @@ const PurchaseComponent: React.FC<Props> = ({ purchase }) => {
           <ProductsGrid products={purchase.products} isPurchase />
         </div>
       </div>
+      <Divider />
     </div>
   );
 };
