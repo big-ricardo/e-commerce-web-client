@@ -46,7 +46,7 @@ const AddressComponent: React.FC = () => {
     if (status.success) return;
 
     dispatch(getAddress(id));
-  }, []);
+  }, [status, id]);
 
   return (
     <>

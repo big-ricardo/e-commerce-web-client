@@ -1,5 +1,5 @@
 import Submit from "../../components/atom/submit";
-import AddressInput from "../../components/molecule/addressInputs";
+import AddressInput from "../../components/molecule/addressInputGrid";
 import { UserCreate } from "@/interfaces/user";
 import { MailOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
