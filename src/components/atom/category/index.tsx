@@ -6,24 +6,37 @@ import { useDispatch } from "react-redux";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   category: Category;
+  isSelected?: boolean;
 }
 
-const CategoryComponent: React.FC<Props> = ({ category }) => {
+const CategoryComponent: React.FC<Props> = ({
+  category,
+  isSelected = false,
+}) => {
   const dispatch = useDispatch();
 
   const handleClick = useCallback(
     (e: any) => {
       e.preventDefault();
+      if (isSelected) {
+        dispatch(getProducts({}));
+        return;
+      }
+
       dispatch(getProducts({ categoryIds: category.id }));
     },
-    [category],
+    [category, isSelected],
   );
 
   return (
-    <div
+    <button
       key={category.id}
-      className="flex flex-col items-center border-2 border-indigo-300 min-w-[120px] snap-center
-      justify-center bg-white w-32 py-5 px-2 rounded-xl hover:shadow-lg cursor-pointer"
+      className={`flex flex-col items-center border-2 border-indigo-300 min-w-[120px] snap-center
+        justify-center bg-white w-32 py-5 px-2 rounded-xl hover:shadow-lg ${
+          isSelected
+            ? "border-indigo-500 shadow-lg transform scale-110"
+            : "opacity-80"
+        }`}
       onClick={handleClick}
     >
       <img
@@ -39,7 +52,7 @@ const CategoryComponent: React.FC<Props> = ({ category }) => {
           {category.name}
         </h2>
       </Tooltip>
-    </div>
+    </button>
   );
 };
 

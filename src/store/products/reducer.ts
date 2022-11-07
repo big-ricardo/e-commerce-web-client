@@ -4,6 +4,7 @@ import * as actions from "./actionsTypes";
 
 export interface ProductsState {
   data: Product[];
+  category: string | null;
   status: {
     get: requestStatus;
   };
@@ -11,6 +12,7 @@ export interface ProductsState {
 
 const initialState: ProductsState = {
   data: [],
+  category: null,
   status: {
     get: {
       loading: false,
@@ -25,6 +27,7 @@ export default (state = initialState, action: any) => {
     case actions.GET_PRODUCTS:
       return {
         ...state,
+        category: action.payload.categoryIds || null,
         status: {
           ...state.status,
           get: {
