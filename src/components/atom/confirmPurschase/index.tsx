@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { confirmPurchase, resetCart } from "../../../store/cart/actions";
 import { rootState } from "../../../store/reducers";
 import toastr from "toastr";
+import QRCode from "react-qr-code";
 
 const Item = ({
   label,
@@ -48,11 +49,38 @@ const ConfirmPurchaseComponent: React.FC = () => {
   const PaymentItem = useCallback(
     () => (
       <div className="flex flex-col">
-        <Item label="Nome" value={payment.card?.client?.name} />
-        <Item label="CPF" value={payment.card?.client?.cpf} />
-        <Item label="Número do cartão" value={payment.card?.cardNumber} />
-        <Item label="Validade" value={payment.card?.validity} />
-        <Item label="Código de segurança" value={payment.card?.securityCode} />
+        {payment.type === "creditCard" ? (
+          <>
+            <Item label="Tipo" value={"Cartão de Credito"} />
+            <Item label="Nome" value={payment.card?.client?.name} />
+            <Item label="CPF" value={payment.card?.client?.cpf} />
+            <Item label="Número do cartão" value={payment.card?.cardNumber} />
+            <Item label="Validade" value={payment.card?.validity} />
+            <Item
+              label="Código de segurança"
+              value={payment.card?.securityCode}
+            />
+          </>
+        ) : (
+          <>
+            <Item label="Tipo" value={"Pix"} />
+            <div
+              style={{
+                height: "auto",
+                margin: "0 auto",
+                maxWidth: 64,
+                width: "100%",
+              }}
+            >
+              <QRCode
+                size={256}
+                style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+                value={`Pix não identificado ${totalSales}`}
+                viewBox={`0 0 256 256`}
+              />
+            </div>
+          </>
+        )}
       </div>
     ),
     [payment],
