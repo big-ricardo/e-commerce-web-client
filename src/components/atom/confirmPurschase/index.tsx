@@ -39,9 +39,10 @@ const ConfirmPurchaseComponent: React.FC = () => {
   const handleConfirmPurchase = () => {
     toastr.clear();
     const data = {
-      payment: payment.type === "creditCard" ? 1 : 2,
+      payment: payment.type === "creditCard" ? 0 : 1,
       address,
       products: cart.products,
+      totalSales,
     };
     dispatch(confirmPurchase(data));
   };

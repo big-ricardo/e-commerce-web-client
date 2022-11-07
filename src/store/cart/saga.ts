@@ -14,11 +14,20 @@ interface ConfirmPurchaseAction {
 }
 
 export function* getCategories({ payload }: ConfirmPurchaseAction) {
+  const data: any = {
+    ...payload.cart,
+    valorTotal: payload.cart.totalSales,
+  };
+  delete data.totalSales;
   try {
-    const response: AxiosResponse = yield call(api.post, "/pedidos/finaliza-pedido", {
-      ...payload.cart,
-    });
-    const { data } = response;
+    const response: AxiosResponse = yield call(
+      api.post,
+      "/pedidos/finaliza-pedido",
+      {
+        ...data,
+      },
+    );
+    const {} = response;
     yield put(confirmPurchaseSuccess());
   } catch (error: any) {
     yield put(confirmPurchaseFailure(error.message));
