@@ -36,7 +36,7 @@ const AddressComponent: React.FC = () => {
 
   const disabledButton = useMemo(() => {
     if (address && selectAddress) {
-      return address.id === selectAddress.id;
+      return address?.id === selectAddress?.id;
     }
     return false;
   }, [address, selectAddress]);
@@ -56,9 +56,9 @@ const AddressComponent: React.FC = () => {
       <Radio.Group
         onChange={onChange}
         value={selectAddress}
-        className="w-full mt-5"
+        className="w-full mt-5 overflow-y-auto h-96"
         defaultValue={
-          addresses?.find((a: Address) => a.id === address?.id) || null
+          addresses?.find((a: Address) => a?.id === address?.id) || null
         }
       >
         {addresses?.map((address: Address, key: number) => (
