@@ -1,10 +1,22 @@
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { PlusCircleOutlined } from "@ant-design/icons";
 
 import { Form, Tooltip } from "antd";
 import AddressInput from "../../../components/atom/addressInput";
+import { api } from "../../../services/api";
+import { State } from "@/interfaces/address";
 
 const AddressGridComponent = () => {
+  const [states, setStates] = useState<State[]>([]);
+
+  const getStates = async () => {
+    await api.get("/estados").then(res => setStates(res.data));
+  };
+
+  useEffect(() => {
+    if (!states.length) getStates();
+  }, []);
+
   return (
     <Form.List
       name="addresses"
@@ -45,6 +57,7 @@ const AddressGridComponent = () => {
               fieldsLength={fields.length}
               remove={remove}
               index={key}
+              states={states}
             />
           ))}
           {!!errors.length && (

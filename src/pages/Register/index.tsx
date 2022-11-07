@@ -19,7 +19,6 @@ const RegisterComponent: React.FC = () => {
   );
 
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
     values.addresses = values.addresses.map((address: any) => {
       return {
         ...address,

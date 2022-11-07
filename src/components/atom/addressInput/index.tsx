@@ -11,6 +11,7 @@ interface AddressInputProps {
   index: number;
   remove: any;
   fieldsLength: number;
+  states: State[] | null;
 }
 
 const AddressInputComponent = ({
@@ -18,15 +19,16 @@ const AddressInputComponent = ({
   field,
   index,
   remove,
-fieldsLength,
+  states,
+  fieldsLength,
 }: AddressInputProps) => {
   const [citys, setCitys] = useState<City[]>([]);
-  const [states, setStates] = useState<State[]>([]);
-  const [selectedState, setSelectedState] = useState<State>();
+  const [selectedCity, setSelectedCity] = useState<City | undefined | null>(
+    null,
+  );
+  const [selectedState, setSelectedState] = useState<State | null>();
 
-  const getStates = async () => {
-    await api.get("/estados").then(res => setStates(res.data));
-  };
+  const form = Form.useForm();
 
   const getCities = async () => {
     const state = selectedState?.id;
@@ -37,14 +39,14 @@ fieldsLength,
   };
 
   const handleSelectState = (value: string) => {
-    const state = states.find(state => state.id === value);
-
+    const state = states?.find(state => state.id === value);
     setSelectedState(state);
   };
 
-  useEffect(() => {
-    if (!states.length) getStates();
-  }, []);
+  const handleSelectCity = (value: string) => {
+    const city = citys?.find(city => city.id === value);
+    setSelectedCity(city);
+  };
 
   useEffect(() => {
     getCities();
@@ -149,9 +151,10 @@ fieldsLength,
             placeholder="Estado"
             size="large"
             onChange={handleSelectState}
+            value={selectedState?.id}
           >
-            {states.map(state => (
-              <Select.Option index={state.id} value={state.id}>
+            {states?.map(state => (
+              <Select.Option value={state.id} key={state.id + Date.now()}>
                 {state.name}
               </Select.Option>
             ))}
@@ -169,9 +172,14 @@ fieldsLength,
             },
           ]}
         >
-          <Select placeholder="Cidade" size="large">
+          <Select
+            placeholder="Cidade"
+            size="large"
+            value={selectedCity?.id}
+            onChange={handleSelectCity}
+          >
             {citys.map(city => (
-              <Select.Option index={city.id} value={city.id}>
+              <Select.Option value={city.id} key={city.id + Date.now()}>
                 {city.name}
               </Select.Option>
             ))}
