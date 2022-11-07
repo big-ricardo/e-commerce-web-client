@@ -3,7 +3,7 @@ import AddressInput from "../../components/molecule/addressInputGrid";
 import { UserCreate } from "@/interfaces/user";
 import { MailOutlined, UserOutlined, LockOutlined } from "@ant-design/icons";
 import { Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { memo, useEffect } from "react";
 import Logo from "../../components/atom/logo";
 import { useDispatch } from "react-redux";
@@ -151,6 +151,7 @@ const RegisterComponent: React.FC = () => {
           </p>
         </Form>
       </div>
+      {requestStatus.success && <Navigate to="/login" />}
     </div>
   );
 };

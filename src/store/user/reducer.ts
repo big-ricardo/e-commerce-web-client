@@ -84,7 +84,6 @@ export default (state = initialState, action: any) => {
     case actions.USER_CREATE_SUCCESS:
       return {
         ...state,
-        data: action.payload.user,
         status: {
           ...state.status,
           create: {
