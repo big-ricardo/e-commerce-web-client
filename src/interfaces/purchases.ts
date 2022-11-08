@@ -6,8 +6,9 @@ export default interface Purchase {
   id: string;
   date: string;
   products: Product[];
-  total: number;
+  totalPrice: number;
   address: Address;
+  payment: number;
 }
 
 export interface CreatePurchase {

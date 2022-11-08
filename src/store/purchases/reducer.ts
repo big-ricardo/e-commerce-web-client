@@ -3,12 +3,12 @@ import { requestStatus } from "@/interfaces/interfaces";
 import * as actions from "./actionTypes";
 
 interface initialStateProps {
-  purchases: Purchase[];
+  data: Purchase[];
   status: requestStatus;
 }
 
 const initialState: initialStateProps = {
-  purchases: [],
+  data: [],
   status: {
     loading: false,
     error: false,
@@ -33,7 +33,7 @@ export default function purchasesReducer(
     case actions.GET_PURCHASES_SUCCESS:
       return {
         ...state,
-        purchases: action.payload.purchases,
+        data: action.payload.purchases,
         status: {
           loading: false,
           error: false,

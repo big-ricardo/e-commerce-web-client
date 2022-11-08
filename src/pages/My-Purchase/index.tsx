@@ -26,7 +26,7 @@ const DashboardComponent: React.FC = () => {
 
   return (
     <div className="bg-blue-100 rounded-xl m-auto mt-10 p-2 md:p-10 w-11/12 2xl:w-3/4">
-      {purchases.purchases.map((purchase: Purchase) => (
+      {purchases.data.map((purchase: Purchase) => (
         <PurchaseComponent purchase={purchase} />
       ))}
     </div>

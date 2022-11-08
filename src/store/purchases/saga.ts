@@ -13,15 +13,7 @@ export function* getPurchases({ payload }: any) {
       api.get,
       "/clientes/pedidos/" + id,
     );
-    const data: Purchase[] = response.data.map((purchase: any) => {
-      return {
-        id: purchase.id,
-        date: purchase.dataPedido,
-        products: purchase.produtos,
-        address: purchase.endereco,
-        total: purchase.valorTotal,
-      };
-    });
+    const data: Purchase[] = response.data;
 
     yield put(getPurchasesSuccess(data));
   } catch (error: any) {
