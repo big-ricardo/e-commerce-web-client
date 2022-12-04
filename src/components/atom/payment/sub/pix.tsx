@@ -9,9 +9,9 @@ const PixPayment = () => {
   const dispatch = useDispatch();
   const totalSales = useSelector((state: any) => state.cart.totalSales);
 
-  const handleClick = (e:any) => {
+  const handleClick = (e: any) => {
     e.preventDefault();
-    dispatch(addPayment({type: "pix"}));
+    dispatch(addPayment({ type: "pix" }));
   };
 
   return (

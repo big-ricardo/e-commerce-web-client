@@ -83,6 +83,7 @@ const AddressInputComponent = ({
               message: "Preencha a rua e o numero do endereço.",
             },
           ]}
+          data-testid="input-street"
         >
           <Input placeholder="Rua" size="large" />
         </Form.Item>
@@ -96,6 +97,7 @@ const AddressInputComponent = ({
               message: "Preencha seu bairro.",
             },
           ]}
+          data-testid="input-neighborhood"
         >
           <Input placeholder="Bairro" size="large" />
         </Form.Item>
@@ -107,6 +109,7 @@ const AddressInputComponent = ({
               whitespace: true,
             },
           ]}
+          data-testid="input-complement"
         >
           <Input placeholder="Complemento" size="large" />
         </Form.Item>
@@ -121,6 +124,7 @@ const AddressInputComponent = ({
               message: "Preencha o numero do endereço.",
             },
           ]}
+          data-testid="input-number"
         >
           <Input placeholder="Numero" size="large" />
         </Form.Item>
@@ -146,6 +150,7 @@ const AddressInputComponent = ({
               message: "Preencha seu estado.",
             },
           ]}
+          data-testid="select-state"
         >
           <Select
             placeholder="Estado"
@@ -171,6 +176,7 @@ const AddressInputComponent = ({
               message: "Preencha sua cidade.",
             },
           ]}
+          data-testid="select-city"
         >
           <Select
             placeholder="Cidade"

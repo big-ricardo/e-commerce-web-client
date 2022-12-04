@@ -8,7 +8,15 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest --watch --silent"
+    "test": "vitest --silent",
+    "test:watch": "vitest --watch --silent --no-clear-screen",
+    "test:debug": "vitest --debug --silent --no-clear-screen",
+    "test:coverage": "vitest --coverage --silent --no-clear-screen",
+    "test:coverage:open": "open coverage/lcov-report/index.html",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx,.vue src",
+    "lint:fix": "eslint --ext .js,.jsx,.ts,.tsx,.vue src --fix",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,vue,css,scss,md}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx,vue,css,scss,md}\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",

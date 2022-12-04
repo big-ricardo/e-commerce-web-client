@@ -14,8 +14,8 @@ export function* getProducts({
   payload: { productId, categoryIds },
 }: payloadType) {
   try {
-    let params = '';
-    if(categoryIds) {
+    let params = "";
+    if (categoryIds) {
       params = `/categoria/${categoryIds}`;
     }
     const response: AxiosResponse = yield call(api.get, `/produtos${params}`);

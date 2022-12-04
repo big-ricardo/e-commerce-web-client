@@ -55,7 +55,7 @@ export const resetStatus = () => ({
   type: actions.USER_RESET_STATUS,
 });
 
-export const getAddress = (id:string) => ({
+export const getAddress = (id: string) => ({
   type: actions.USER_GET_ADDRESS,
   payload: {
     id,

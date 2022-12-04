@@ -16,7 +16,6 @@ export interface rootState {
   purchases: ReturnType<typeof purchasesReducer>;
 }
 
-
 const rootReducer = combineReducers({
   user: userReducer,
   cart: cartReducer,

@@ -12,7 +12,7 @@ const defaultOptions = {
 
 const Logo = ({ width = 70 }) => {
   return (
-    <div>
+    <div data-testid="logo">
       <Lottie options={defaultOptions} width={width} />
     </div>
   );

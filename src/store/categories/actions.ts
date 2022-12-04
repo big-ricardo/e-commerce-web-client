@@ -1,20 +1,20 @@
-import * as actions from './actionsTypes';
-import Category from '@/interfaces/category';
+import * as actions from "./actionsTypes";
+import Category from "@/interfaces/category";
 
 export const getCategories = () => ({
-    type: actions.GET_CATEGORIES,
+  type: actions.GET_CATEGORIES,
 });
 
 export const getCategoriesSuccess = (categories: Category[]) => ({
-    type: actions.GET_CATEGORIES_SUCCESS,
-    payload: {
-        categories,
-    },
+  type: actions.GET_CATEGORIES_SUCCESS,
+  payload: {
+    categories,
+  },
 });
 
 export const getCategoriesFailure = (error: any) => ({
-    type: actions.GET_CATEGORIES_FAILURE,
-    payload: {
-        error,
-    },
+  type: actions.GET_CATEGORIES_FAILURE,
+  payload: {
+    error,
+  },
 });

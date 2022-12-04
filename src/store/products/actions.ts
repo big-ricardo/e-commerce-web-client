@@ -2,7 +2,7 @@ import Product from "@/interfaces/product";
 import * as actions from "./actionsTypes";
 
 export interface GetProducts {
-  categoryIds?: string |string[];
+  categoryIds?: string | string[];
   productId?: string | string[];
 }
 

@@ -63,6 +63,7 @@ const RegisterComponent: React.FC = () => {
           name="create"
           onFinish={onFinish}
           className="flex flex-col items-center"
+          data-testid="form"
         >
           <div className="flex flex-1 gap-5 flex-wrap">
             <div className="p-5 pt-0 pb-0">
@@ -72,6 +73,7 @@ const RegisterComponent: React.FC = () => {
                 rules={[
                   { required: true, message: "Por favor preencha seu nome!" },
                 ]}
+                data-testid="input-name"
               >
                 <Input
                   prefix={<UserOutlined />}
@@ -85,6 +87,7 @@ const RegisterComponent: React.FC = () => {
                 rules={[
                   { required: true, message: "Por favor preencha seu email!" },
                 ]}
+                data-testid="input-email"
               >
                 <Input
                   prefix={<MailOutlined />}
@@ -106,6 +109,7 @@ const RegisterComponent: React.FC = () => {
                     message: "A senha deve ter no mínimo 6 caracteres!",
                   },
                 ]}
+                data-testid="input-password"
               >
                 <Input
                   prefix={<LockOutlined />}
@@ -133,6 +137,7 @@ const RegisterComponent: React.FC = () => {
                   }),
                 ]}
                 dependencies={["password"]}
+                data-testid="input-password-confirm"
               >
                 <Input
                   prefix={<LockOutlined />}
@@ -151,7 +156,9 @@ const RegisterComponent: React.FC = () => {
           </div>
           <p>
             <strong className="text-indigo-500">Ou</strong>{" "}
-            <Link to="/login">faça login</Link>
+            <Link to="/login" data-testid="link-login">
+              faça login
+            </Link>
           </p>
         </Form>
       </div>
