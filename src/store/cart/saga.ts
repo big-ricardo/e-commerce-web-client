@@ -5,6 +5,7 @@ import { api } from "../../services/api";
 import { confirmPurchaseSuccess, confirmPurchaseFailure } from "./actions";
 import { CONFIRM_PURCHASE } from "./actionTypes";
 import Cart from "@/interfaces/cart";
+import { resetPurchases } from "../purchases/actions";
 
 interface ConfirmPurchaseAction {
   type: typeof CONFIRM_PURCHASE;
@@ -13,12 +14,15 @@ interface ConfirmPurchaseAction {
   };
 }
 
-export function* getCategories({ payload }: ConfirmPurchaseAction) {
+export function* confirmPurchase({ payload }: ConfirmPurchaseAction) {
   const data: any = {
     ...payload.cart,
     valorTotal: payload.cart.totalSales,
   };
   delete data.totalSales;
+
+  yield put(resetPurchases());
+
   try {
     const response: AxiosResponse = yield call(
       api.post,
@@ -34,12 +38,12 @@ export function* getCategories({ payload }: ConfirmPurchaseAction) {
   }
 }
 
-export function* watchGetCategories() {
-  yield takeEvery<any>(CONFIRM_PURCHASE, getCategories);
+export function* watchConfirmPurchase() {
+  yield takeEvery<any>(CONFIRM_PURCHASE, confirmPurchase);
 }
 
 function* categoriesSaga() {
-  yield all([fork(watchGetCategories)]);
+  yield all([fork(watchConfirmPurchase)]);
 }
 
 export default categoriesSaga;

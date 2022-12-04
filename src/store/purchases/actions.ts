@@ -21,3 +21,7 @@ export const getPurchasesFailure = (error: string) => ({
     error,
   },
 });
+
+export const resetPurchases = () => ({
+  type: actions.RESET_PURCHASES,
+});

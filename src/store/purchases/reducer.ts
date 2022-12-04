@@ -49,6 +49,8 @@ export default function purchasesReducer(
           success: false,
         },
       };
+    case actions.RESET_PURCHASES:
+      return initialState;
     default:
       return state;
   }
