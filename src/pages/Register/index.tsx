@@ -49,7 +49,12 @@ const RegisterComponent: React.FC = () => {
     <div className="flex justify-center items-center md:h-screen h-auto">
       <div className="bg-blue-100 p-5 rounded-r-xl shadow-xl ">
         <div className="flex justify-center items-center mb-10">
-          <h1 className="text-blue-900 text-3xl">Criar Usúario</h1>
+          <h1
+            className="text-blue-900 text-3xl"
+            data-testid="title-create-user"
+          >
+            Criar Usúario
+          </h1>
           <div>
             <Logo />
           </div>
