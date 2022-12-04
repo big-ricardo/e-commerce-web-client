@@ -1,5 +1,6 @@
 import "@testing-library/jest-dom";
 import "vitest-canvas-mock";
+import "./antd-mock";
 
 beforeAll(() => {
   Object.defineProperty(window, "matchMedia", {

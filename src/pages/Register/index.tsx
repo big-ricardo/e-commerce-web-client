@@ -73,13 +73,13 @@ const RegisterComponent: React.FC = () => {
                 rules={[
                   { required: true, message: "Por favor preencha seu nome!" },
                 ]}
-                data-testid="input-name"
               >
                 <Input
                   prefix={<UserOutlined />}
                   type="name"
                   placeholder="Nome"
                   size="large"
+                  data-testid="input-name"
                 />
               </Form.Item>
               <Form.Item
@@ -87,13 +87,13 @@ const RegisterComponent: React.FC = () => {
                 rules={[
                   { required: true, message: "Por favor preencha seu email!" },
                 ]}
-                data-testid="input-email"
               >
                 <Input
                   prefix={<MailOutlined />}
                   type="email"
                   placeholder="Email"
                   size="large"
+                  data-testid="input-email"
                 />
               </Form.Item>
               <Form.Item
@@ -109,13 +109,13 @@ const RegisterComponent: React.FC = () => {
                     message: "A senha deve ter no mínimo 6 caracteres!",
                   },
                 ]}
-                data-testid="input-password"
               >
                 <Input
                   prefix={<LockOutlined />}
                   type="password"
                   placeholder="Senha"
                   size="large"
+                  data-testid="input-password"
                 />
               </Form.Item>
 
@@ -137,13 +137,13 @@ const RegisterComponent: React.FC = () => {
                   }),
                 ]}
                 dependencies={["password"]}
-                data-testid="input-password-confirm"
               >
                 <Input
                   prefix={<LockOutlined />}
                   type="new-password"
                   placeholder="Confirmar"
                   size="large"
+                  data-testid="input-password-confirm"
                 />
               </Form.Item>
             </div>

@@ -9,7 +9,7 @@ interface Props {
 
 const SubmitComponent: React.FC<Props> = props => {
   return (
-    <div className={props.className} data-testid="submit-component">
+    <div className={props.className}>
       {props.loading ? (
         <div
           className="w-full mt-12 p-2 bg-indigo-500 text-white 
@@ -26,6 +26,7 @@ const SubmitComponent: React.FC<Props> = props => {
           type="submit"
           className="w-full mt-5 p-2 bg-indigo-500 hover:bg-gray-100 text-white 
           hover:text-indigo-900 border-2 border-blue-200 hover:b rounded-md"
+          data-testid="submit-component"
         >
           {props.text}
         </button>

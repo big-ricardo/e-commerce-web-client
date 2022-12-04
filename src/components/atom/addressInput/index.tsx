@@ -83,9 +83,8 @@ const AddressInputComponent = ({
               message: "Preencha a rua e o numero do endereço.",
             },
           ]}
-          data-testid="input-street"
         >
-          <Input placeholder="Rua" size="large" />
+          <Input placeholder="Rua" size="large" data-testid="input-street" />
         </Form.Item>
         <Form.Item
           {...field}
@@ -97,9 +96,12 @@ const AddressInputComponent = ({
               message: "Preencha seu bairro.",
             },
           ]}
-          data-testid="input-neighborhood"
         >
-          <Input placeholder="Bairro" size="large" />
+          <Input
+            placeholder="Bairro"
+            size="large"
+            data-testid="input-neighborhood"
+          />
         </Form.Item>
         <Form.Item
           {...field}
@@ -109,9 +111,12 @@ const AddressInputComponent = ({
               whitespace: true,
             },
           ]}
-          data-testid="input-complement"
         >
-          <Input placeholder="Complemento" size="large" />
+          <Input
+            placeholder="Complemento"
+            size="large"
+            data-testid="input-complement"
+          />
         </Form.Item>
         <Form.Item
           {...field}
@@ -124,9 +129,8 @@ const AddressInputComponent = ({
               message: "Preencha o numero do endereço.",
             },
           ]}
-          data-testid="input-number"
         >
-          <Input placeholder="Numero" size="large" />
+          <Input placeholder="Numero" size="large" data-testid="input-number" />
         </Form.Item>
         <Form.Item
           {...field}
@@ -139,7 +143,7 @@ const AddressInputComponent = ({
             },
           ]}
         >
-          <Input placeholder="CEP" size="large" />
+          <Input placeholder="CEP" size="large" data-testid="input-zipCode" />
         </Form.Item>
         <Form.Item
           {...field}
@@ -150,13 +154,13 @@ const AddressInputComponent = ({
               message: "Preencha seu estado.",
             },
           ]}
-          data-testid="select-state"
         >
           <Select
             placeholder="Estado"
             size="large"
             onChange={handleSelectState}
             value={selectedState?.id}
+            data-testid="select-state"
           >
             {states?.map(state => (
               <Select.Option value={state.id} key={state.id + Date.now()}>
@@ -176,13 +180,13 @@ const AddressInputComponent = ({
               message: "Preencha sua cidade.",
             },
           ]}
-          data-testid="select-city"
         >
           <Select
             placeholder="Cidade"
             size="large"
             value={selectedCity?.id}
             onChange={handleSelectCity}
+            data-testid="select-city"
           >
             {citys.map(city => (
               <Select.Option value={city.id} key={city.id + Date.now()}>
