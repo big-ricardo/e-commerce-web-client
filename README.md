@@ -37,7 +37,7 @@ ou
 yarn
 ```
 
-### ☕ Usando <nome_do_projeto>
+### ☕ Usando o e-commerce
 
 Para usar e-commerce frontend siga estas etapas:
 
