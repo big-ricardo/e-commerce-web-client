@@ -9,13 +9,23 @@ O app trata-se de um aplicativo de e-commerce, oferecendo uma diversidade de pro
 
 ![Imagem da dashboard](https://user-images.githubusercontent.com/39037985/205447834-9c9f4803-96d3-44c4-93a9-a63ce75ad575.png)
 
-## 💻 Pré-requisitos
+### 👨‍💻 Tecnologias
+
+ * React
+ * Antd UI
+ * Styled-components
+ * Redux | Redux toolkit
+ * Redux Saga
+ * Lottie
+ * Vitest
+
+### 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 - NodeJs 14+
 
-## 🚀 Instalando frontend e-commerce 
+### 🚀 Instalando frontend e-commerce 
 
 Para instalar o e-commerce, siga estas etapas:
 
@@ -27,7 +37,7 @@ ou
 yarn
 ```
 
-## ☕ Usando <nome_do_projeto>
+### ☕ Usando <nome_do_projeto>
 
 Para usar e-commerce frontend siga estas etapas:
 
@@ -39,7 +49,7 @@ ou
 yarn dev
 ```
 
-## 📦 Executando os testes
+### 📦 Executando os testes
 ```
 yarn test
 ```
