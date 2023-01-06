@@ -1,5 +1,3 @@
-# Trabalho final - computação orientada à objetos II
-
 ## E-commerce
 
 O app trata-se de um aplicativo de e-commerce, oferecendo uma diversidade de produtos separados por categoria. O cliente pode realizar seu cadastro por meio do nome, email, senha e endereço. O aplicativo permite que o usuário selecione a quantidade de produtos desejada no carrinho, escolha a forma de pagamento (pix ou cartão de crédito) e o endereço que deseja receber o pedido. Após a efetuação da compra, o cliente recebe um email de confirmação e resumo da compra efetuada.
